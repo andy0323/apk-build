@@ -2,7 +2,9 @@
 
 apk-build node 一款安卓打包apk的工具 
 
-## 全局配置属性表
+# 上传测试Demo
+
+<!--## 全局配置属性表
 
 | 属性名称 | 属性介绍 |
 |---------|---------|
@@ -23,3 +25,4 @@ apk-build node 一款安卓打包apk的工具
 | out-unsigned-package | 未认证apk包 |
 | keystore-file | 证书文件 |
 | out-signed-package |  已认证apk包 |
+-->

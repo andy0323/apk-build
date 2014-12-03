@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant">  
+   
+    <target name="aaa">  
+        <exec executable="/Users/andy/private/tool/android/sdk/build-tools/android-4.4W/aapt" failonerror="true">  
+            <arg value="package" />  
+            <arg value="-f" />  
+            <arg value="-m" />  
+            <arg value="-J" />  
+            <arg value="gen" />  
+            <arg value="-S" />  
+            <arg value="res" />  
+            <arg value="-M" />  
+            <arg value="AndroidManifest.xml" />  
+            <arg value="-I" />  
+            <arg value="/Users/andy/private/tool/android/sdk/platforms/android-19/android.jar" />  
+        </exec>  
+    </target> 
+   
+    <target name="aidl">  
+        <echo>Compiling .aidl into java files...</echo>  
+        <apply executable="/Users/andy/private/tool/android/sdk/build-tools/android-4.4W/aidl" failonerror="true">  
+            <!-- 指定预处理文件 -->  
+            <arg value="-p/Users/andy/private/tool/android/sdk/platforms/android-19/framework.aidl"/>  
+            <!-- aidl声明的目录 -->  
+            <arg value="-Isrc"/>  
+            <!-- 目标文件目录 -->  
+            <arg value="-ogem"/>  
+            <!-- 指定哪些文件需要编译 -->  
+            <fileset dir="src">  
+                <include name="**/*.aidl"/>  
+            </fileset>  
+        </apply>  
+    </target>  
+    <target name="compile">  
+        <javac encoding="utf-8" target="1.5" srcdir="." destdir="class_path" bootclasspath="/Users/andy/private/tool/android/sdk/platforms/android-19/android.jar">  
+            <classpath>  
+                <fileset dir="libs" includes="*.jar"/>  
+                <filelist>  
+                    <file name="/Users/andy/private/tool/android/sdk/add-ons/addon-google_apis-google-19/libs/maps.jar"/>  
+                </filelist>  
+            </classpath>  
+        </javac>  
+    </target>
+    <target name="dex">  
+        <exec executable="/Users/andy/private/tool/android/sdk/build-tools/android-4.4W/dx" failonerror="true">  
+            <arg value="--dex" />  
+            <!-- 输出文件 -->  
+            <arg value="--output=dex_osoath" />  
+            <!-- 要生成.dex文件的源classes和libraries -->  
+            <arg value="class_path" />  
+            <arg value="libs"/>  
+        </exec>  
+    </target>
+    <!-- 将资源文件放进输出目录 -->  
+    <target name="package-res-and-assets">  
+        <echo>Packaging resources and assets...</echo>  
+        <exec executable="/Users/andy/private/tool/android/sdk/build-tools/android-4.4W/aapt" failonerror="true">  
+            <arg value="package" />  
+            <arg value="-f" />  
+            <arg value="-M" />  
+            <arg value="AndroidManifest.xml" />  
+            <arg value="-S" />  
+            <arg value="res" />  
+            <arg value="-A" />  
+            <arg value="assets" />  
+            <arg value="-I" />  
+            <arg value="/Users/andy/private/tool/android/sdk/platforms/android-19/android.jar" />  
+            <arg value="-F" />  
+            <arg value="resources-package" />  
+        </exec>  
+    </target>  
+    <!-- 打包成未签证的apk -->  
+    <!-- <target name="package">  
+        <exec executable="/Users/andy/private/tool/android/sdk/build-tools/android-4.4W/apkbuilder.bat" failonerror="true">  
+            <arg value="test.apk" />  
+            <arg value="-u" />  
+            <arg value="-z" />  
+            <arg value="resources-package" />  
+            <arg value="-f" />  
+            <arg value="dex_osoath/class.dex" />  
+            <arg value="-rf" />  
+            <arg value="src" />  
+        </exec>  
+        <echo>It will need to be signed with jarsigner before being published.</echo>  
+    </target>   -->
+    <target name="try">  
+        <java classpath="/Users/andy/private/tool/android/sdk/tools/lib/sdklib.jar" classname="com.android.sdklib.build.ApkBuilderMain"> 
+            <arg value="unsigned.apk" /> 
+            <arg value="-u" /> 
+            <arg value="-z" /> 
+            <arg value="resources-package.zip" /> 
+            <arg value="-f" /> 
+            <arg value="dex_osoath/classes.dex" /> 
+            <arg value="-rf" /> 
+            <arg value="src" /> 
+            <arg value="-rj"/> 
+            <arg value="libs"/> 
+    <!--         <arg value="-nf"/> 
+            <arg value="${path.build.native}"/>  -->
+        </java>
+    </target>
+        <target name="singn">  
+        <exec executable="/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/jarsigner" failonerror="true">  
+            <arg value="-keystore"/>  
+            <arg value="/Users/andy/Desktop/android.keystore"/>  
+            <arg value="-storepass" />  
+            <arg value="nationsky88" />  
+            <arg value="-keypass" />  
+            <arg value="nationsky88" />  
+            <arg value="-signedjar" />  
+            <arg value="/Users/andy/Desktop/signed.apk" />  
+            <arg value="/Users/andy/Desktop/unsigned.apk"/>  
+            <!-- 不要忘了证书的别名 -->  
+            <arg value="android.keystore"/> 
+        </exec>
+    </target>
+</project> 
