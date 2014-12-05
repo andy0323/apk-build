@@ -13,7 +13,7 @@
   "license": "MIT",
   "main": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./bin/apk-build test/node/android test/android.keystore android.keystore 123456"
   },
   "preferGlobal": "true",
   "bin": {
