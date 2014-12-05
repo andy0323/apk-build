@@ -41,6 +41,16 @@ keystore_password代表打包证书的密码
 
 **目前版本不是很稳定，只能打包简单的Android项目。**
 
+## keystore
+
+### 如何生成keystore
+
+进入终端，输入下列命令，然后根据指定的要求输入特定的内容。
+
+```
+keytool -genkey -alias android.keystore -keyalg RSA -validity 20000 -keystore android.keystore
+```
+
 ## Test
 
 如何测试apk-build？
