@@ -39,6 +39,7 @@ keystore_password代表打包证书的密码
 *  输入`apk-build test/node/android test/android.keystore android.keystore 123456`
 *  输入`open .`获取apk文件
 
+**目前版本不是很稳定，只能打包简单的Android项目。**
 
 ## Test
 
