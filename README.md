@@ -20,7 +20,7 @@ apk-build node 一款安卓打包apk的工具
 	
 **参数（必填项）：** 
 
-project_path代表项目路径 
+project_path代表项目路径   
 keystore_path代表打包证书的路径  
 keystore_name代表打包证书的名称  
 keystore_password代表打包证书的密码  
