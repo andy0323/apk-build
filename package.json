@@ -1,14 +1,25 @@
 {
   "name": "apk-build",
-  "version": "1.0.0",
-  "description": "apk打包工具",
-  "main": "index.js",
+  "version": "0.1.0",
+  "author": "Andy Jin",
+  "description": "Tools -- Create apk",
+  "keywords": [
+    "apk android tool"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andy0323/apk-build"
+  },
+  "license": "MIT",
+  "main": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
+  "preferGlobal": "true",
+  "bin": {
+    "apk-build": "./bin/apk-build"
+  },
+  "dependencies": {
     "shelljs": "^0.3.0"
   }
 }
