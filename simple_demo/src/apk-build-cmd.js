@@ -14,9 +14,6 @@ function get_aapt_cmd(gen_path, res_path, xml_path, android_jar_path) {
 	// 基础命令
 	var cmd = 'aapt';
 	
-	// 初始化gen文件夹
-	shell.exec('rm -rf ' + gen_path);
-
 	// 设置参数
 	cmd = cmd_append_cmd(cmd, 'package');	
 	cmd = cmd_append_cmd(cmd, '-f');
@@ -72,22 +69,17 @@ exports.get_aidl_cmd = get_aidl_cmd;
  */
 function get_compile_cmd(src_dir_path, dest_dir_path, bootclass_path, libs_dir_path, map_jap_path) {
 	// 基本命令
-	var cmd = 'javac';
+	var cmd = 'apkbuilder';
 
 	// 设置依赖库 
 	var class_path_cmd = libs_dir_path + ':' + map_jap_path;
 
-	cmd = cmd_append_cmd(cmd, '-encoding utf-8');
-	cmd = cmd_append_cmd(cmd, '-target 1.5');
-	cmd = cmd_append_cmd(cmd, '-sourcepath');
-	cmd = cmd_append_cmd(cmd, src_dir_path);
-	cmd = cmd_append_cmd(cmd, '-d');
+	cmd = cmd_append_cmd(cmd, 'utf-8');
+	cmd = cmd_append_cmd(cmd, '1.5');
 	cmd = cmd_append_cmd(cmd, dest_dir_path);
-	cmd = cmd_append_cmd(cmd, '-bootclasspath');
 	cmd = cmd_append_cmd(cmd, bootclass_path);
-	cmd = cmd_append_cmd(cmd, '-classpath');
 	cmd = cmd_append_cmd(cmd, class_path_cmd);
-	cmd = cmd_append_cmd(cmd, './**/*.java')
+	cmd = cmd_append_cmd(cmd, src_dir_path);
 
 	return cmd;	
 }
@@ -154,7 +146,7 @@ exports.get_package_cmd = get_package_cmd;
  *
  * 	@param sdklib_jar_path   sdklib的Jar包
  * 	@param unsigned_apk_path 未签证apk导出路径
- *	@param res_package_path  资源文件.Zip包
+ *	@param res_package_path  资源文件包
  *	@param class_dex_path    dex文件路径
  *	@param src_path          资源路径
  *	@param lib_path          依赖路径

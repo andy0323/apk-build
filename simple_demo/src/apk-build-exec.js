@@ -13,10 +13,9 @@ var _cmd = require('./apk-build-cmd.js');
  */
 function aadp_exec (gen_path, res_path, xml_path, android_jar_path) {
 	var cmd = _cmd.get_aapt_cmd(gen_path, res_path, xml_path, android_jar_path);
-	console.log(cmd);
+	shell.exec(cmd);
 }
-// aadp_exec('gen', 'res', 'AndroidManifest.xml', '/Users/andy/private/tool/android/sdk/platforms/android-19/android.jar');
-
+exports.aadp_exec = aadp_exec;
 
 /**
  *  执行指令
@@ -31,6 +30,7 @@ function aadp_exec (gen_path, res_path, xml_path, android_jar_path) {
 function aidl_exec(aidl_framework_path, src_path, gen_path, aidl_file_path) {
 
 }
+exports.aidl_exec = aidl_exec;
 
 /**
  *  获取指令
@@ -45,11 +45,11 @@ function aidl_exec(aidl_framework_path, src_path, gen_path, aidl_file_path) {
  */
 function compile_exec(src_dir_path, dest_dir_path, bootclass_path, libs_dir_path, map_jap_path) {
 	var cmd =  _cmd.get_compile_cmd(src_dir_path, dest_dir_path, bootclass_path, libs_dir_path, map_jap_path);
-	console.log(cmd);
+	shell.exec(cmd);
 }
-// compile_exec('.', 'class_path', '/Users/andy/private/tool/android/sdk/platforms/android-19/android.jar', 'libs', '/Users/andy/private/tool/android/sdk/add-ons/addon-google_apis-google-19/libs/maps.jar');       
+exports.compile_exec = compile_exec;
 
-/**
+/*
  *	执行指令
  *
  *	将.class文件转化成.dex文件
@@ -60,11 +60,11 @@ function compile_exec(src_dir_path, dest_dir_path, bootclass_path, libs_dir_path
  */
 function dex_exec(dex_path, class_path, lib_path) {
 	var cmd = _cmd.get_dex_cmd(dex_path, class_path, lib_path);
-	console.log(cmd);
+	shell.exec(cmd);
 }
-// dex_exec('dex_osoath', 'class_path', 'libs');
+exports.dex_exec = dex_exec;
 
-/**
+/*
  *	执行指令
  *
  *  将资源文件放进输出目录
@@ -74,13 +74,12 @@ function dex_exec(dex_path, class_path, lib_path) {
  * 	@param assets_path      资源文件路径
  * 	@param android_jar_path 安卓Jar包
  * 	@param res_package_path 输出资源Zip包
- */
+ */ 
 function package_exec(xml_path, res_path, assets_path, android_jar_path, res_package_path) {
 	var cmd = _cmd.get_package_cmd(xml_path, res_path, assets_path, android_jar_path, res_package_path);
-	console.log(cmd);
+	shell.exec(cmd);
 }
-// package_exec('AndroidManifest.xml', 'res', 'assets', '/Users/andy/private/tool/android/sdk/platforms/android-19/android.jar', 'resources-package');
-
+exports.package_exec = package_exec;
 
 /**
  *	执行指令
@@ -96,9 +95,9 @@ function package_exec(xml_path, res_path, assets_path, android_jar_path, res_pac
  */
 function apk_builder_exec(sdklib_jar_path, unsigned_apk_path, res_package_path, class_dex_path, src_path, lib_path) {
 	var cmd = _cmd.get_apk_builder_cmd(sdklib_jar_path, unsigned_apk_path, res_package_path, class_dex_path, src_path, lib_path);
-	console.log(cmd);
+	shell.exec(cmd);
 }
-// apk_builder_exec('/Users/andy/private/tool/android/sdk/tools/lib/sdklib.jar', 'unsigned.apk', 'resources-package', 'dex_osoath/classes.dex', 'src', 'libs');
+exports.apk_builder_exec = apk_builder_exec;
 
 /**
  *	执行指令
@@ -113,9 +112,10 @@ function apk_builder_exec(sdklib_jar_path, unsigned_apk_path, res_package_path, 
  */
 function jarsigner_exec(keystore_path, keystore_pass, keystore_name, signed_apk_path, unsigned_apk_path) {
 	var cmd = _cmd.get_jarsigner_cmd(keystore_path, keystore_pass, keystore_name, signed_apk_path, unsigned_apk_path);
-	console.log(cmd);
+	shell.exec(cmd);
 }
-jarsigner_exec('/Users/andy/Desktop/android.keystore', 'nationsky88', 'android.keystore', 'signed.apk', 'unsigned.apk');
+exports.jarsigner_exec = jarsigner_exec;
+
 
 
 

@@ -1,0 +1,26 @@
+#!/bin/zsh
+
+ENCODING=$1
+TARGET=$2
+DEST_PATH=$3
+BOOT_CLASS_PATH=$4
+CLASS_PATH=$5
+PROJECT_PATH=$6
+
+if [[ $# != 6 && $1 != help ]]; then
+	echo 传入参数有误, 输入 help 查看相关信息
+	return
+fi
+
+if [[ $1 = help ]]; then
+	echo 请按照下列顺序传入正确的参数
+	echo arg1 ENCODING
+	echo arg2 TARGET
+	echo arg3 DEST_PATH
+	echo arg4 BOOT_CLASS_PATH
+	echo arg5 CLASS_PATH
+	echo arg6 PROJECT_PATH
+	return
+fi
+
+javac -encoding ${ENCODING} -target ${TARGET} -d ${DEST_PATH} -bootclasspath ${BOOT_CLASS_PATH} -classpath ${CLASS_PATH} ${PROJECT_PATH}/**/*.java
