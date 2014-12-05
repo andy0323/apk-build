@@ -47,4 +47,4 @@ function build_exec(pro_path, apk_output_path, keystore_path, keystore_name, key
 	_exec.apk_builder_exec(SDK_SDKLIB_JAR_PATH, unsigned_apk_path, package_path, dx_path + '/*.dex', src_path, lib_path);
 	_exec.jarsigner_exec(keystore_path, keystore_pas, keystore_name, apk_output_path, unsigned_apk_path);
 }
-build_exec('.', 'aa.apk', '/Users/andy/Desktop/android.keystore', 'android.keystore', 'nationsky88');
+module.exports = build_exec;

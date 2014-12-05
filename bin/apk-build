@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+var shell   = require('shelljs');
+var utils   = require('../lib/utils.js');
+var program = require('commander');
+var version = require("../package.json").version;
+
+Array.prototype.contain = function(obj) { return this.indexOf(obj) !== -1;}
+
+program
+  .version(version)
+    .usage(" apk-build tools")
+    .option('-v, --verbose', '打印详细日志')
+    .option('-o, --output [output]', '指定apk输出路径')
+  .parse(process.argv);
+
+var args = program.args;
+
+if (args.length < 4) {
+    console.log('请输入正确的参数, 详情参照 apk-build -help');
+};
+
+var proj_path = args[0];
+var keystore_path = args[1];
+var keystore_name = args[2];
+var keystore_password = args[3];
+
+// apk输出路径
+var output_path = 'signed.apk';
+if (program.output) {
+    output_path = program.output;
+};
+
+// 是否打印
+var _verbose = program.verbose;
+utils.verbose = _verbose;
+
+utils.log('项目路径: ' + proj_path);
+utils.log('输出路径: ' + output_path);
+utils.log('证书路径: ' + keystore_path);
+utils.log('证书名称: ' + keystore_name);
+utils.log('证书密码: ' + keystore_password);
+
+require('../index.js')(proj_path, output_path, keystore_path, keystore_name, keystore_password);
+
+
+
+

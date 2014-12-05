@@ -20,6 +20,7 @@
     "apk-build": "./bin/apk-build"
   },
   "dependencies": {
+    "commander": "^2.5.0",
     "shelljs": "^0.3.0"
   }
 }
