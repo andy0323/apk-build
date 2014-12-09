@@ -35,13 +35,14 @@ function build_exec(pro_path, apk_output_path, keystore_path, keystore_name, key
 	shell.exec('rm -rf ' + pro_path + '/*.apk');
 
 	// 初始化文件目录
+	shell.exec('mkdir -p ' + gen_path);
 	shell.exec('mkdir -p ' + class_path);
-	shell.exec('mkdir -p '  + dx_path);
+	shell.exec('mkdir -p ' + dx_path);
 
 
 	// 开始执行脚本
 	_exec.aadp_exec(gen_path, res_path, xml_path, SDK_ANDROID_JAR_PATH);
-	_exec.compile_exec(pro_path, class_path, SDK_ANDROID_JAR_PATH, lib_path, SDK_MAP_JAR_PATH);       
+	_exec.compile_exec(src_path, class_path, SDK_ANDROID_JAR_PATH, lib_path, SDK_MAP_JAR_PATH);       
 	_exec.dex_exec(dx_path, class_path, lib_path, SDK_MAP_JAR_PATH);
 	_exec.package_exec(xml_path, res_path, ass_path, SDK_ANDROID_JAR_PATH, package_path);
 	_exec.apk_builder_exec(SDK_SDKLIB_JAR_PATH, unsigned_apk_path, package_path, dx_path + '/*.dex', src_path, lib_path);

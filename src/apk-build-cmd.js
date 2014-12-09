@@ -71,8 +71,11 @@ function get_compile_cmd(src_dir_path, dest_dir_path, bootclass_path, libs_dir_p
 	// 基本命令
 	var cmd = 'apkbuilder';
 
+	// 依赖库脚本
+	var class_path = get_class_path(libs_dir_path);
+	
 	// 设置依赖库 
-	var class_path_cmd = libs_dir_path + ':' + map_jap_path;
+	var class_path_cmd = class_path + map_jap_path;
 
 	cmd = cmd_append_cmd(cmd, 'utf-8');
 	cmd = cmd_append_cmd(cmd, '1.5');
@@ -214,3 +217,21 @@ function cmd_append_cmd(cmd, new_cmd) {
 
     return cmd;
 }
+
+/**
+ *	获取依赖Jar包
+ */
+function get_class_path(search_path) {
+	// 获取所有Jar包
+	var jars = shell.find('-R', search_path).filter(function(file) { return file.match(/\.jar$/); });
+
+	// 拼接字符串
+	var class_path = '';
+	for (var i = 0; i < jars.length; i++) {
+		class_path += jars[i];
+		class_path += ':'
+	}
+
+	return class_path;
+}
+
