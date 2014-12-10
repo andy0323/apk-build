@@ -23,4 +23,4 @@ if [[ $1 = help ]]; then
 	return
 fi
 
-javac -encoding ${ENCODING} -target ${TARGET} -d ${DEST_PATH} -bootclasspath ${BOOT_CLASS_PATH} -classpath ${CLASS_PATH} ${PROJECT_PATH}/**/*.java
+javac -encoding ${ENCODING} -target ${TARGET} -d ${DEST_PATH} ${PROJECT_PATH}/src/**/*.java ${PROJECT_PATH}/gen/**/*.java -bootclasspath ${BOOT_CLASS_PATH} -classpath ${CLASS_PATH} 
